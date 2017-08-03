@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="st-layout ls-top-navbar ls-bottom-footer show-sidebar sidebar-l2" lang="en">
+<html class="hide-sidebar ls-bottom-footer" lang="{{ app()->getLocale() }}">
 
 <head>
   <meta charset="utf-8">
@@ -7,8 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
+  <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>{{ config('app.name', 'LRM') }}</title>
 
   <!-- Vendor CSS BUNDLE
     Includes styling for all of the 3rd party libraries used with this module, such as Bootstrap, Font Awesome and others.
@@ -104,7 +105,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
             <span class="icon-bar"></span>
           </button>
           <a href="#sidebar-chat" data-toggle="sidebar-menu" data-effect="st-effect-1" class="toggle pull-right visible-xs "><i class="fa fa-comments"></i></a>
-          <a class="navbar-brand navbar-brand-primary hidden-xs" href="index.html">LRP</a>
+          <a class="navbar-brand navbar-brand-primary hidden-xs" href="index.html">ThemeKit</a>
         </div>
         <div class="collapse navbar-collapse" id="main-nav">
           <ul class="nav navbar-nav hidden-xs">
@@ -174,7 +175,13 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               <ul class="dropdown-menu" role="menu">
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="messages.html">Messages</a></li>
-                <li><a href="login.html">Logout</a></li>
+                <li><a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">Logout</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      {{ csrf_field() }}
+                  </form>
+                </li>
               </ul>
             </li>
           </ul>
@@ -187,22 +194,27 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
                 <input type="text" class="form-control" placeholder="Search a friend">
               </div>
             </div>
+            <div class="pull-left visible-md visible-lg" data-toggle="tooltip" data-placement="bottom" title="A few Color Examples. Download includes CSS Files for all color examples & the tools to Generate any Color combination. This Color-Switcher is for previewing purposes only.">
+              <ul class="skins">
+
+                <li><span data-file="app/app" data-skin="default" style="background: #16ae9f "></span></li>
+
+                <li><span data-file="skin-orange" data-skin="orange" style="background: #e74c3c "></span></li>
+
+                <li><span data-file="skin-blue" data-skin="blue" style="background: #4687ce "></span></li>
+
+                <li><span data-file="skin-purple" data-skin="purple" style="background: #af86b9 "></span></li>
+
+                <li><span data-file="skin-brown" data-skin="brown" style="background: #c3a961 "></span></li>
+
+              </ul>
+            </div>
           </form>
 
           <ul class="nav navbar-nav navbar-right hidden-xs">
             <li class="pull-right">
               <a href="#sidebar-chat" data-effect="st-effect-1" data-toggle="sidebar-menu">
                 <i class="fa fa-comments"></i>
-              </a>
-            </li>
-			<li class="pull-right">
-              <a href="#">
-                <i class="fa fa-bell" style="color:#26a69a !important;"></i>
-              </a>
-            </li>
-			<li class="pull-right">
-              <a href="#">
-                <i class="fa fa-exclamation-triangle" style="color:red !important;"></i>
               </a>
             </li>
           </ul>
@@ -214,71 +226,33 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
     <div class="sidebar left sidebar-size-2 sidebar-offset-0 sidebar-visible-desktop sidebar-visible-mobile sidebar-skin-dark" id="sidebar-menu" data-type="collapse">
       <div data-scrollable>
         <ul class="sidebar-menu">
-          <li class="hasSubmenu">
-            <a href="#timeline"><i class="icon-ship-wheel"></i> <span>General Info</span></a>
-            <ul id="timeline">
-              <li><a href="general-personal.html"><i class="fa fa-circle-o"></i> <span>Personal Data</span></a></li>
-              <li><a href="general-address.html"><i class="fa fa-circle-o"></i> <span>Address</span></a></li>
-              <li><a href="general-communications.html"><i class="fa fa-circle-o"></i> <span>Communications</span></a></li>
-              <li><a href="general-personnelids.html"><i class="fa fa-circle-o"></i> <span>Personnel IDs</span></a></li>
-              <li><a href="general-familymember.html"><i class="fa fa-circle-o"></i> <span>Family Members</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Academics</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Memberships</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Objects on Loan</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Reminders & Notifications</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Travel Info</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Documents</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Leisure Activities</span></a></li>
+          <li><a href="../../../index.html"><i class="icon-paint-brush"></i> <span>Themes</span></a></li>
+          <li class="category">Navigation</li>
+          <li class="hasSubmenu open">
+            <a href="#timeline"><i class="icon-ship-wheel"></i> <span>Timeline</span></a>
+            <ul class="in" id="timeline">
+              <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> <span>Blocks</span></a></li>
+              <li><a href="timeline-list.html"><i class="fa fa-circle-o"></i> <span>Listing</span></a></li>
             </ul>
           </li>
-         <!-- <li class=""><a href="profile.html"><i class="icon-user-1"></i> <span>Profile</span></a></li>
+          <li class=""><a href="profile.html"><i class="icon-user-1"></i> <span>Profile</span></a></li>
           <li class=""><a href="users.html"><i class="fa fa-group"></i> <span>Users</span></a></li>
           <li class=""><a href="messages.html"><i class="icon-comment-fill-1"></i> <span>Messages</span></a></li>
-          <li><a href="login.html"><i class="icon-lock-fill"></i> <span>Login</span></a></li> -->
+          <li><a href="login.html"><i class="icon-lock-fill"></i> <span>Login</span></a></li>
           <li class="hasSubmenu">
-            <a href="#Finance"><i class="fa fa-money"></i> <span>Finance</span></a>
-            <ul id="Finance">
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Loans</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Insurances</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>RD/Chits</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Bank Deatils</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Assets</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>equity/MF</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>F & O</span></a></li>
-            </ul>
-          </li>
-		  <li class="hasSubmenu">
-            <a href="#Health"><i class="fa fa-medkit"></i> <span>Health</span></a>
-            <ul id="Health">
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Medical Information</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Surgeries</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Short-Term Illness</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Long-Term Illness</span></a></li>
-            </ul>
-          </li>
-		  <li class="hasSubmenu">
-            <a href="#CarrerLearing"><i class="fa fa-graduation-cap"></i> <span>Carrer & Learning</span></a>
-            <ul id="CarrerLearing">
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Skills</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Professional Education</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Trainings</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Work Experience</span></a></li>
-            </ul>
-          </li>
-		  <li class="hasSubmenu">
-            <a href="#DailyActivities"><i class="fa fa-bell"></i> <span>Daily Activities</span></a>
-            <ul id="DailyActivities">
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>My Fitness</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Today's Challenge</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>My Learings</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>My Diet</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>My Tasks</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>Reminders & Notifications</span></a></li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> <span>My Finance</span></a></li>
+            <a href="#components"><i class="icon-paint-brushes"></i> <span>UI Components</span></a>
+            <ul id="components">
+              <li><a href="essential-buttons.html"><i class="fa fa-circle-o"></i> <span>Buttons</span></a></li>
+              <li><a href="essential-icons.html"><i class="fa fa-circle-o"></i> <span>Icons</span></a></li>
+              <li><a href="essential-progress.html"><i class="fa fa-circle-o"></i> <span>Progress</span></a></li>
+              <li><a href="essential-grid.html"><i class="fa fa-circle-o"></i> <span>Grid</span></a></li>
+              <li><a href="essential-forms.html"><i class="fa fa-circle-o"></i> <span>Forms</span></a></li>
+              <li><a href="essential-tables.html"><i class="fa fa-circle-o"></i> <span>Tables</span></a></li>
+              <li><a href="essential-tabs.html"><i class="fa fa-circle-o"></i> <span>Tabs</span></a></li>
             </ul>
           </li>
           <!-- Sample 2 Level Collapse -->
-          <!--<li class="hasSubmenu">
+          <li class="hasSubmenu">
             <a href="#submenu"><i class="fa fa-chevron-circle-down"></i> <span>Collapse</span></a>
             <ul id="submenu">
               <li class="hasSubmenu">
@@ -289,22 +263,89 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
               </li>
               <li><a href="#"><i class="fa fa-circle-o"></i> Regular Link</a></li>
             </ul>
-          </li>-->
+          </li>
         </ul>
-        <h4 class="category">Favorites</h4>
+        <h4 class="category border top">News Feeds</h4>
+        <div class="sidebar-block">
+          <ul class="sidebar-feed">
+            <li class="media">
+              <div class="media-left">
+                <span class="media-object">
+                            <i class="fa fa-fw fa-bell"></i>
+                        </span>
+              </div>
+              <div class="media-body">
+                <a href="" class="text-white">Adrian</a> just logged in
+                <span class="time">2 min ago</span>
+              </div>
+              <div class="media-right">
+                <span class="news-item-success"><i class="fa fa-circle"></i></span>
+              </div>
+            </li>
+            <li class="media">
+
+              <div class="media-left">
+                <span class="media-object">
+                            <i class="fa fa-fw fa-bell"></i>
+                        </span>
+              </div>
+              <div class="media-body">
+                <a href="" class="text-white">Adrian</a> just added <a href="" class="text-white">mosaicpro</a> as their office
+                <span class="time">2 min ago</span>
+              </div>
+              <div class="media-right">
+                <span class="news-item-success"><i class="fa fa-circle"></i></span>
+              </div>
+            </li>
+            <li class="media">
+              <div class="media-left">
+                <span class="media-object">
+                            <i class="fa fa-fw fa-bell"></i>
+                        </span>
+              </div>
+              <div class="media-body">
+                <a href="" class="text-white">Adrian</a> just logged in
+                <span class="time">2 min ago</span>
+              </div>
+            </li>
+            <li class="media">
+              <div class="media-left">
+                <span class="media-object">
+                            <i class="fa fa-fw fa-bell"></i>
+                        </span>
+              </div>
+              <div class="media-body">
+                <a href="" class="text-white">Adrian</a> just logged in
+                <span class="time">2 min ago</span>
+              </div>
+            </li>
+            <li class="media">
+              <div class="media-left">
+                <span class="media-object">
+                            <i class="fa fa-fw fa-bell"></i>
+                        </span>
+              </div>
+              <div class="media-body">
+                <a href="" class="text-white">Adrian</a> just logged in
+                <span class="time">2 min ago</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4 class="category">Filter</h4>
         <div class="sidebar-block">
           <ul>
-            <li><a href="#" class="sidebar-link"><span class="fa fa-briefcase"></span> Work Related</a></li>
-            <li><a href="#" class="sidebar-link"><span class="fa fa-flag-o"></span> Very Important</a></li>
-            <li><a href="#" class="sidebar-link"><span class="fa fa-users"></span> Friends &amp; Family</a></li>
-            <li><a href="#" class="sidebar-link"><span class="fa fa-globe"></span> Other</a></li>
+            <li><a href="#" class="sidebar-link"><span class="fa fa-fw fa-circle-o text-success"></span> Work Related</a></li>
+            <li><a href="#" class="sidebar-link"><span class="fa fa-fw fa-circle-o text-danger"></span> Very Important</a></li>
+            <li><a href="#" class="sidebar-link"><span class="fa fa-fw fa-circle-o text-info"></span> Friends &amp; Family</a></li>
+            <li><a href="#" class="sidebar-link"><span class="fa fa-fw fa-circle-o text-primary"></span> Other</a></li>
           </ul>
         </div>
       </div>
     </div>
 
     <!-- Sidebar component with st-effect-1 (set on the toggle button within the navbar) -->
-    <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile" id="sidebar-chat">
+    <div class="sidebar sidebar-chat right sidebar-size-2 sidebar-offset-0 chat-skin-white sidebar-visible-mobile" id=sidebar-chat>
       <div class="split-vertical">
         <div class="chat-search">
           <input type="text" class="form-control" placeholder="Search" />
@@ -312,8 +353,8 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         <ul class="chat-filter nav nav-pills ">
           <li class="active"><a href="#" data-target="li">All</a></li>
-          <li><a href="#" data-target=".online">Family</a></li>
-          <li><a href="#" data-target=".offline">Friends</a></li>
+          <li><a href="#" data-target=".online">Online</a></li>
+          <li><a href="#" data-target=".offline">Offline</a></li>
         </ul>
         <div class="split-vertical-body">
           <div class="split-vertical-cell">
@@ -480,8 +521,56 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
         </div>
       </div>
     </div>
+    <script id="chat-window-template" type="text/x-handlebars-template">
 
+      <div class="panel panel-default">
+        <div class="panel-heading" data-toggle="chat-collapse" data-target="#chat-bill">
+          <a href="#" class="close"><i class="fa fa-times"></i></a>
+          <a href="#">
+            <span class="pull-left">
+                    <img src="" width="40">
+                </span>
+            <span class="contact-name"></span>
+          </a>
+        </div>
+        <div class="panel-body" id="chat-bill">
 
+          <div class="media">
+            <div class="media-left">
+              <img src="" width="25" class="img-circle" alt="people" />
+            </div>
+            <div class="media-body">
+              <span class="message">Feeling Groovy?</span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <img src="" width="25" class="img-circle" alt="people" />
+            </div>
+            <div class="media-body">
+              <span class="message">Yep.</span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <img src="" width="25" class="img-circle" alt="people" />
+            </div>
+            <div class="media-body">
+              <span class="message">This chat window looks amazing.</span>
+            </div>
+          </div>
+          <div class="media">
+            <div class="media-left">
+              <img src="" width="25" class="img-circle" alt="people" />
+            </div>
+            <div class="media-body">
+              <span class="message">Thanks!</span>
+            </div>
+          </div>
+        </div>
+        <input type="text" class="form-control" placeholder="Type message..." />
+      </div>
+    </script>
 
     <div class="chat-window-container"></div>
 
@@ -1527,7 +1616,7 @@ WARNING: Respond.js doesn't work if you view the page via file:// -->
 
     <!-- Footer -->
     <footer class="footer">
-      <strong>LRP</strong> &copy; Copyright 2017
+      <strong>{{ config('app.name', 'LRM') }}</strong> v1.0.0 &copy; Copyright 2017
     </footer>
     <!-- // Footer -->
 

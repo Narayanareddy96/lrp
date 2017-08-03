@@ -16,5 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// this is for main
+Route::get('personaldata','GeneralInfoController@personaldata')->name('personaldata');
+Route::post('personaldata','GeneralInfoController@personaldata_insert')->name('personaldata_insert');
 
 Route::get('/home', 'HomeController@index')->name('home');
